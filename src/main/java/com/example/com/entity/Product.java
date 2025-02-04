@@ -21,4 +21,69 @@ public class Product {
     private double price;
     @Column(name = "isDelete", nullable = false)
     private boolean isDelete;
+
+
+    public Product()
+    {
+
+    }
+    public Product(String name, CategoryEnum category, int stock, double price,boolean isDelete) {
+
+        this.name = name;
+        this.category = category;
+        this.stock = stock;
+        this.price = price;
+        this.isDelete=isDelete;
+
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CategoryEnum getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEnum category) {
+        this.category = category;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public boolean getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(boolean delete) {
+        isDelete = delete;
+    }
 }
+
+
