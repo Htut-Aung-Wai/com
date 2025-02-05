@@ -40,8 +40,18 @@ public class ProductService {
 
 
 
-    //Create
+    //Create Product
     public MainResponse createProduct(ProductDataConnector dco) {
+
+        //check for stock and price valid or not
+        if(dco.getStock()==0)
+        {
+            return new MainResponse(failed,null);
+        }
+        if(dco.getPrice()==0)
+        {
+            return new MainResponse(failed,null);
+        }
 
 
         Product product = new Product(dco.getName(), dco.getCategory(), dco.getStock(), dco.getPrice(),false);
@@ -66,6 +76,16 @@ public class ProductService {
     //update by id
     public MainResponse updateById(long id,ProductDataConnector dco)
     {
+
+        //check for stock and price valid or not
+        if(dco.getStock()==0)
+        {
+            return new MainResponse(failed,null);
+        }
+        if(dco.getPrice()==0)
+        {
+            return new MainResponse(failed,null);
+        }
 
         //Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException(failed));
         if(productRepository.existsById(id)) {

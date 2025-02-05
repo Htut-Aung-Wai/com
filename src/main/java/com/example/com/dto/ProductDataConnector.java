@@ -1,6 +1,7 @@
 package com.example.com.dto;
 
-import com.example.com.entity.CategoryEnum;
+import com.example.com.entity.Product.CategoryEnum;
+import com.example.com.entity.Product;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -10,7 +11,7 @@ public class ProductDataConnector {
 
     private String name;
 
-    private CategoryEnum category;
+    private Product.CategoryEnum category;
 
     private int stock;
 
@@ -19,7 +20,7 @@ public class ProductDataConnector {
 
 
 
-    public ProductDataConnector(String name, CategoryEnum category, int stock, double price) {
+    public ProductDataConnector(String name, Product.CategoryEnum category, int stock, double price) {
         this.name = name;
         this.category = category;
         this.stock = stock;
@@ -35,11 +36,11 @@ public class ProductDataConnector {
         this.name = name;
     }
 
-    public CategoryEnum getCategory() {
+    public Product.CategoryEnum getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEnum category) {
+    public void setCategory(Product.CategoryEnum category) {
         this.category = category;
     }
 

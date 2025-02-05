@@ -15,6 +15,11 @@ public class Product {
     @Enumerated(EnumType.STRING)
     @Column(name = "category")
     private CategoryEnum category;
+
+    public enum CategoryEnum {
+
+        CLOTHES,KITCHEN,TOILET,FOOD,PENDING
+    }
     @Column(name = "stock", nullable = false)
     private int stock;
     @Column(name = "price", nullable = false)

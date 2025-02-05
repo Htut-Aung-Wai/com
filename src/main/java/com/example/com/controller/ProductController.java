@@ -35,20 +35,21 @@ private final ProductService productService;
         return productService.getAllProduct();
     }
 
+
     @PutMapping("/update/{id}")
-    public MainResponse updateById(@PathVariable long id,@RequestBody ProductDataConnector productDataConnector)
+    public MainResponse updateById ( @PathVariable long id, @RequestBody ProductDataConnector productDataConnector)
     {
 
-        return productService.updateById(id,productDataConnector);
+        return productService.updateById(id, productDataConnector);
     }
 
     @PutMapping("/isDelete/{id}")
-    public MainResponse deleteByIDSetTrue(@PathVariable long id)
+    public MainResponse deleteByIDSetTrue ( @PathVariable long id)
     {
         return productService.isDeleteTrue(id);
     }
     @DeleteMapping("/delete/{id}")
-    public MainResponse deleteById(@PathVariable long id)
+    public MainResponse deleteById ( @PathVariable long id)
     {
         return productService.Delete(id);
     }
