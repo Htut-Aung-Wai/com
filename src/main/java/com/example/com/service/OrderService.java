@@ -68,7 +68,7 @@ public class OrderService {
     public MainResponse createOrder(OrderDataConnector odc)
     {
 
-        Product product = productRepository.findById(odc.getProductId()).orElseThrow(() -> new RuntimeException(failed));
+        Product product = productRepository.findById(odc.getProductId()).orElseThrow(() -> new RuntimeException(notFound));
 
             //check if product quantity enough
             if(product.getStock()<odc.getQuantity())
@@ -81,7 +81,7 @@ public class OrderService {
                 productRepository.save(product);
             }
 
-        Customer customer = customerRepository.findById(odc.getCustomerId()).orElseThrow(() -> new RuntimeException(failed));
+        Customer customer = customerRepository.findById(odc.getCustomerId()).orElseThrow(() -> new RuntimeException(notFound));
 
             //check if customer balance is enough
 
@@ -144,7 +144,7 @@ public class OrderService {
     {   this.totalPrice=0.0;
         this.productName.clear();
         for (int i=0;i<productId.length;i++)
-        {   Product product=productRepository.findById(productId[i]).orElseThrow(() -> new RuntimeException(failed));
+        {   Product product=productRepository.findById(productId[i]).orElseThrow(() -> new RuntimeException(notFound));
             totalPrice=(product.getPrice()*quantity[i])+totalPrice;
 
             this.productName.add("Name: "+product.getName()+" | Price: "+product.getPrice()+" | Quantity: "+quantity[i]);

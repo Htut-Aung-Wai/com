@@ -23,6 +23,7 @@ public class ProductService {
 
     private final String success;
     private final String failed;
+    private final String notFound;
 
     // Usage of local for i18n
     private final MessageSource messageSource;
@@ -35,6 +36,7 @@ public class ProductService {
         this.messageSource=messageSource;
         success = messageSource.getMessage("success", null, locale);
         failed = messageSource.getMessage("failed", null, locale);
+        notFound=messageSource.getMessage("Not_Found",null,locale);
 
     }
 
@@ -101,7 +103,7 @@ public class ProductService {
 
         else {
 
-            return new MainResponse(failed,null);
+            return new MainResponse(notFound,null);
         }
 
 
@@ -110,7 +112,7 @@ public class ProductService {
     //set is delete to true
     public MainResponse isDeleteTrue(long id)
     {
-        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException(failed));
+        Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException(notFound));
         product.setIsDelete(true);
         return new MainResponse(success,productRepository.save(product));
 
@@ -124,7 +126,7 @@ public class ProductService {
             productRepository.deleteById(id);
             return new MainResponse(success, null);
         }
-        else return new MainResponse(failed,null);
+        else return new MainResponse(notFound,null);
     }
 
 

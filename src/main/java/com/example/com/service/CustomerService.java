@@ -24,6 +24,7 @@ public class CustomerService {
 
     private final String success;
     private final String failed;
+    private final String notFound;
 
     // Usage of local for i18n
     private final MessageSource messageSource;
@@ -34,6 +35,7 @@ public class CustomerService {
         this.messageSource = messageSource;
         success = messageSource.getMessage("success", null, locale);
         failed = messageSource.getMessage("failed", null, locale);
+        notFound=messageSource.getMessage("Not_Found",null,locale);
     }
 
 
@@ -74,7 +76,7 @@ public class CustomerService {
 
         else {
 
-            return new MainResponse(failed,null);
+            return new MainResponse(notFound,null);
         }
 
 
@@ -84,7 +86,7 @@ public class CustomerService {
     //change Status to Disabled
     public MainResponse updateStatus(long id)
     {
-        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException(failed));
+        Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException(notFound));
         customer.setStatus(Customer.StatusEnum.DISABLED);
         return new MainResponse(success,customerRepository.save(customer));
 
@@ -98,7 +100,7 @@ public class CustomerService {
             customerRepository.deleteById(id);
             return new MainResponse(success, null);
         }
-        else return new MainResponse(failed,null);
+        else return new MainResponse(notFound,null);
     }
 
 
