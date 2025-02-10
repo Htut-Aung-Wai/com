@@ -18,6 +18,8 @@ public class MainResponse {
 
     }
 
+
+
     public String getMessage() {
         return message;
     }
@@ -26,11 +28,14 @@ public class MainResponse {
         this.message = message;
     }
 
-    public Object getObj() {
+
+    public Object getResult() {
         return result;
     }
 
-    public void setObj(Object obj) {
-        this.result = obj;
+    public void setResult(Object result) {
+        this.result = result;
     }
+
+
 }

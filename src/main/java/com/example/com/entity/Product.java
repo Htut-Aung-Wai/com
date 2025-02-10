@@ -2,6 +2,8 @@ package com.example.com.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
 @Table(name = "product")
@@ -26,6 +28,9 @@ public class Product {
     private double price;
     @Column(name = "isDelete", nullable = false)
     private boolean isDelete;
+
+    /*@OneToMany(mappedBy = "orders")
+    private List<Order> orders;*/
 
 
     public Product()

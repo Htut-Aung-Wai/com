@@ -3,6 +3,7 @@ package com.example.com.service;
 
 import com.example.com.dto.OrderCollectionConnector;
 import com.example.com.dto.OrderDataConnector;
+import com.example.com.dto.OrderReturnWithCustomerId;
 import com.example.com.dto.ProductDataConnector;
 import com.example.com.entity.Customer;
 import com.example.com.entity.Order;
@@ -12,11 +13,13 @@ import com.example.com.repository.OrderRepository;
 import com.example.com.repository.ProductRepository;
 import com.example.com.response.MainResponse;
 import com.sun.tools.javac.Main;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
@@ -65,13 +68,14 @@ public class OrderService {
     }
 
     //Create Order
+    @Transactional
     public MainResponse createOrder(OrderDataConnector odc)
     {
 
         Product product = productRepository.findById(odc.getProductId()).orElseThrow(() -> new RuntimeException(notFound));
 
             //check if product quantity enough
-            if(product.getStock()<odc.getQuantity())
+            if(product.getStock()<odc.getQuantity() && odc.getQuantity()!=0)
             {
                 return new MainResponse(outOfStock,null);
             }
@@ -118,7 +122,7 @@ public class OrderService {
     }
 
 
-    // get order by customer id
+    // get order by customer id (output with array)
     public MainResponse getOrderByCustomerId(long customerId){
 
 
@@ -137,6 +141,24 @@ public class OrderService {
 
 
 
+    }
+
+
+    //get order by customer id (output with customer id repeat)
+    public MainResponse getOrderByCustomerIdRepeat(long customerId)
+    {
+
+        if(!orderRepository.existsByCustomerId(customerId))
+    {
+        return new MainResponse(notFound,null);
+    }
+        double totalPrice=0.0;
+        List<OrderReturnWithCustomerId> orderReturnWithCustomerId=orderRepository.findByCustomerId(customerId);
+        for(OrderReturnWithCustomerId orderReturnWithCustomerIdOneItem:orderReturnWithCustomerId)
+        {
+            totalPrice+=orderReturnWithCustomerIdOneItem.getTotalPrice();
+        }
+        return new MainResponse("Customer Id is "+customerId+"| Total Price is "+totalPrice,orderRepository.findByCustomerId(customerId));
     }
 
     //calculate price for final order

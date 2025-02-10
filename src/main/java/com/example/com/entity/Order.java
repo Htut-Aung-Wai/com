@@ -16,6 +16,11 @@ public class Order {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
+   /* @ManyToOne  // Many employees belong to one department
+    @JoinColumn(name = "productId")  // Foreign key column in the employee table
+    private Product product;*/
+
+
 
     public Order()
     {

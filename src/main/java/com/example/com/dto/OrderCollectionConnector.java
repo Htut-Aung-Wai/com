@@ -14,6 +14,11 @@ public class OrderCollectionConnector {
 
     private ArrayList<String> productName=new ArrayList<>();
 
+    public OrderCollectionConnector()
+    {
+
+    }
+
 
     public OrderCollectionConnector(long customerId, long[] productId, int[] quantity,double totalPrice,ArrayList<String> productName) {
         this.customerId = customerId;
@@ -64,13 +69,8 @@ public class OrderCollectionConnector {
         this.productName = productName;
     }
 
-    public double calculateTotalPrice(long[] productId, long[] quantity)
-    {
 
-        for (int i=0;i<productId.length;i++)
-        {
-            totalPrice=(productId[i]*quantity[i])+totalPrice;
-        }
-        return totalPrice;
-    }
+
+
+
 }

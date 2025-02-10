@@ -33,7 +33,13 @@ public class CustomerController {
         return customerService.getAllProduct();
     }
 
-    @PutMapping("/update/{id}")
+    @GetMapping("/{id}")
+    public MainResponse getByCustomerId(@PathVariable long id)
+    {
+        return customerService.getCustomerById(id);
+    }
+
+    @PutMapping("/{id}")
     public MainResponse updateById ( @PathVariable long id, @RequestBody CustomerDataConnector customerDataConnector)
     {
 
@@ -45,7 +51,7 @@ public class CustomerController {
     {
         return customerService.updateStatus(id);
     }
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public MainResponse deleteById ( @PathVariable long id)
     {
         return customerService.Delete(id);

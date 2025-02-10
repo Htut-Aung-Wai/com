@@ -8,6 +8,7 @@ import com.example.com.entity.Product;
 import com.example.com.repository.CustomerRepository;
 import com.example.com.repository.ProductRepository;
 import com.example.com.response.MainResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class CustomerService {
         notFound=messageSource.getMessage("Not_Found",null,locale);
     }
 
+        // create customer
 
     public MainResponse createCustomer(CustomerDataConnector dco) {
 
@@ -56,8 +58,9 @@ public class CustomerService {
 
     //get by id
     public MainResponse getCustomerById(long id){
-
-        return new MainResponse(success,customerRepository.findById(id));
+        if(customerRepository.findById(id).isPresent())
+        {return new MainResponse(success,customerRepository.findById(id));}
+        else return new MainResponse(notFound,null);
     }
 
     //update by id
@@ -84,6 +87,7 @@ public class CustomerService {
 
 
     //change Status to Disabled
+    @Transactional
     public MainResponse updateStatus(long id)
     {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new RuntimeException(notFound));
@@ -102,6 +106,8 @@ public class CustomerService {
         }
         else return new MainResponse(notFound,null);
     }
+
+
 
 
 

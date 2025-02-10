@@ -5,6 +5,7 @@ import com.example.com.dto.ProductDataConnector;
 import com.example.com.entity.Product;
 import com.example.com.repository.ProductRepository;
 import com.example.com.response.MainResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -110,6 +111,7 @@ public class ProductService {
     }
 
     //set is delete to true
+    @Transactional
     public MainResponse isDeleteTrue(long id)
     {
         Product product = productRepository.findById(id).orElseThrow(() -> new RuntimeException(notFound));

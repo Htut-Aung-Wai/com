@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class CategoryRestControllerAdvice {
 
     @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public String IllegalArgumentExceptionHandler(RuntimeException runtimeException)
     {
         return runtimeException.getMessage();

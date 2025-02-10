@@ -36,7 +36,7 @@ private final ProductService productService;
     }
 
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public MainResponse updateById ( @PathVariable long id, @RequestBody ProductDataConnector productDataConnector)
     {
 
@@ -48,7 +48,9 @@ private final ProductService productService;
     {
         return productService.isDeleteTrue(id);
     }
-    @DeleteMapping("/delete/{id}")
+
+
+    @DeleteMapping("/{id}")
     public MainResponse deleteById ( @PathVariable long id)
     {
         return productService.Delete(id);
